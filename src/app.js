@@ -9,6 +9,7 @@ var cors_1 = __importDefault(require("cors"));
 var body_parser_1 = __importDefault(require("body-parser"));
 var mysql_1 = __importDefault(require("mysql"));
 var express_myconnection_1 = __importDefault(require("express-myconnection"));
+var routes_1 = __importDefault(require("./routes"));
 var config = require('../config/config.json');
 var App = /** @class */ (function () {
     function App() {
@@ -26,10 +27,6 @@ var App = /** @class */ (function () {
             limit: config.corsHeaders
         }));
         app.use(express_myconnection_1.default(mysql_1.default, config.database, 'single'));
-        app.all("*", function (req, res, next) {
-            console.log("hi");
-            next();
-        });
     };
     App.prototype.mountRoutes = function () {
         var router = express_1.default.Router();
@@ -39,6 +36,7 @@ var App = /** @class */ (function () {
             });
         });
         this.app.use('/', router);
+        this.app.use('/', routes_1.default);
     };
     return App;
 }());

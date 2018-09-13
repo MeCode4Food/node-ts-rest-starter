@@ -31,14 +31,19 @@ class App {
 
     app.use(connection(mysql, config.database, 'single'));
 
-    app.all("*", function(req, res, next){
-        console.log("hi");
-        next();
-    })
   }
 
   private mountRoutes (): void {
-    this.app.use('/', routes)
+    const router = express.Router();
+
+    router.get('/', (req, res) => {
+      res.json({
+        message: 'Hello World!'
+      })
+    })
+
+    this.app.use('/', router);
+    this.app.use('/', routes);
   }
 }
 

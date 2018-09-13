@@ -27,7 +27,13 @@ First step is to open the terminal at the root directory, and install relevant d
 npm install
 ```
 
-after that, launch using
+after that, build the js modules using 
+
+```
+tsc
+```
+
+and then, launch using
 
 ```
 npm start
@@ -36,7 +42,7 @@ npm start
 You should be able to then use an API testing service, or access the API endpoint using
 
 ```
-GET https://127.0.0.1/8000/<path>
+GET 127.0.0.1/8000/<path>
 ```
 where port 8000 and other settings can be changed at `./config/config.json`.
 
