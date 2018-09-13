@@ -1,6 +1,7 @@
-import app from './src/app'
+import app from './src/app';
+const config = require("./config/config.json");
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || config.port;
 
 app.listen(port, (err: Error) => {
   if (err) {

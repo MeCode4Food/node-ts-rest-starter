@@ -4,6 +4,7 @@ import cors from 'cors'
 import bodyParser from 'body-parser'
 import mysql from 'mysql'
 import connection from 'express-myconnection'
+import routes from './routes'
 const config = require('../config/config.json');
 
 class App {
@@ -37,14 +38,7 @@ class App {
   }
 
   private mountRoutes (): void {
-    const router = express.Router()
-    router.get('/', (req, res) => {
-      res.json({
-        message: 'Hello World!'
-      })
-    })
-
-    this.app.use('/', router)
+    this.app.use('/', routes)
   }
 }
 
