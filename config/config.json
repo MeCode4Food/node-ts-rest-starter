@@ -7,7 +7,7 @@
         "host": "localhost",
         "user": "chickuser",
         "password": "password",
-        "database": "chick",
+        "database_name": "chick",
         "debug": true
     }
 }

@@ -1,30 +1,25 @@
 import DatabaseService from '../db/database_service'
+import Journal from '../models/journal'
+import {Promise} from 'es6-promise'
 
 class JournalController{
     private dbService: DatabaseService;
 
     constructor(dbService: DatabaseService){
         this.dbService = dbService;
+        this.dbService.openConnection();
     }
 
-    getSingleJournal(id: number){
-        this.dbService.openConnection();
+    getSingleJournal(id: number): Promise<Journal>{
 
         let query: string = "SELECT * FROM journal where id = ?";
 
         let args: Array<any> = [];
         args.push(id);
-
-
-        this.dbService.executeQuery(query, args)
+        
+        return this.dbService.executeReadQuery(query, args)
             .then((results) =>{
-                console.log(results);
-            })
-            .catch((err) =>{
-                console.log(err);
-            })
-            .then(() => {
-                this.dbService.closeConnection();
+                return results[0];
             })
     }
 }

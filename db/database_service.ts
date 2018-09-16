@@ -1,4 +1,5 @@
 import { Connection, MysqlError } from 'mysql'
+import Journal from '../models/journal'
 import connection from './mysql_connection';
 import { Promise } from 'es6-promise' 
 
@@ -19,11 +20,28 @@ class DatabaseService{
 
 
     // remember to change type any to something else
-    executeQuery(query: string, args: Array<string>): Promise<any>{
+    executeReadQuery(query: string, args: Array<string>): Promise<Array<Journal>>{
         return new Promise((resolve, reject) =>{
             this.connection.query(query, args, (err: MysqlError | null, results: Array<any>) => {
-                if(err) Promise.reject(err)
-                else Promise.resolve(results)
+                if(err){ 
+                    console.log(err);
+                    reject(err);
+                }
+                else {
+                    let journalArray: Array<Journal> = [];
+
+                    if(results.length !== 0){
+                        results.forEach((rawJournal) => {
+                            let singleJournal = new Journal(rawJournal);
+                            journalArray.push(singleJournal);
+                        })
+                        resolve(journalArray);
+                    }
+                    else{
+                        let notFoundError = new Error("No journals found for given query");
+                        reject(notFoundError);
+                    }
+                }
             })
         })
     }

@@ -1,4 +1,7 @@
 node_modules
 src/*.js
+db/*.js
+controllers/*.js
+models/*.js
 index.js
 app.js
