@@ -2,8 +2,6 @@ import express from 'express'
 import morgan from 'morgan'
 import cors from 'cors'
 import bodyParser from 'body-parser'
-import mysql from 'mysql'
-import connection from 'express-myconnection'
 import routes from './routes'
 const config = require('../config/config.json');
 
@@ -28,8 +26,6 @@ class App {
     app.use(bodyParser.json({
         limit: config.corsHeaders
     }));
-
-    app.use(connection(mysql, config.database, 'single'));
 
   }
 
