@@ -18,7 +18,6 @@ class DatabaseService{
         return this.connection.end();
     }
 
-
     // remember to change type any to something else
     executeReadQuery(query: string, args: Array<string>): Promise<Array<Journal>>{
         return new Promise((resolve, reject) =>{

@@ -21,4 +21,7 @@ export default class Journal{
             this.date = date;
         }
 
+        toJSON(){
+            return JSON.parse(JSON.stringify(this));
+        }
 }
