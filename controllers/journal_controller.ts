@@ -26,9 +26,13 @@ class JournalController{
     putSingleJournal(journal: Journal) : Promise<void>{
         let query: string = "INSERT INTO journal (id, title, content, date) VALUES(?, ?, ?, ?)  ON DUPLICATE KEY UPDATE id = ? ";
 
-        let args: Array<string> = [];
+        let args: Array<any> = [];
 
-        args.push((journal.id).toString());
+        args.push(journal.id);
+        args.push(journal.title);
+        args.push(journal.content);
+        args.push(journal.date);
+        args.push(journal.id);
 
         // implement method for dbService
         return this.dbService.executeWriteQuery(query, args);

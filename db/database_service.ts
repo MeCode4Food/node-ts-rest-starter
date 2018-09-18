@@ -44,6 +44,21 @@ class DatabaseService{
             })
         })
     }
+
+    executeWriteQuery(query: string, args: Array<string>): Promise<void>{
+        return new Promise((resolve, reject) => {
+            this.connection.query(query, args, (err: MysqlError | null, results: any) => {
+                // results is any because it doesn't matter - check with the existence of err
+                if(err){ 
+                    console.log(err);
+                    reject(err);
+                }
+                else {
+                    resolve();
+                }
+            })
+        })
+    }
 }
 
 export default DatabaseService;
