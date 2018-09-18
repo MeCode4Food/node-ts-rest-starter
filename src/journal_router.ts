@@ -23,7 +23,7 @@ journalRouter.get('/:id', (req, res) => {
             .catch((err) => {
 
                 let response = new Response();
-                response.status = "NOT OK";
+                response.status = "Bad Request";
                 response.message = err.toString();
                 res.status(400).json(response);
             })
@@ -36,10 +36,26 @@ journalRouter.get('/:id', (req, res) => {
 journalRouter.put('/:id', (req, res) => {
     try {
         let id: number = req.params.id;
-        let journal = req.body;
-        journalController.putJournal()
+        let journal = new Journal(req.body);
+        journal.setId(id);
+
+        journalController.putSingleJournal(journal)
+            .then(() => {
+                let response = new Response();
+                response.status = "OK";
+                
+                res.status(200).json(response);
+            })
+            .catch((err) => {
+
+                let response = new Response();
+                response.status = "Bad Request";
+                response.message = err.toString();
+                res.status(400).json(response);
+            });
     } catch (error) {
-        
+        console.log('error');
+        console.log(error);
     }
 })
 

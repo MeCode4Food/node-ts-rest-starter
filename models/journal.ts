@@ -31,6 +31,9 @@ export default class Journal{
         return this._date;
     }
 
+    setId(id: number){
+        this._id = id;
+    }
 
     toJSON(){
         return JSON.parse(JSON.stringify(this));
