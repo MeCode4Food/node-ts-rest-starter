@@ -10,6 +10,16 @@ class JournalController{
         this.dbService.openConnection();
     }
 
+    getAllJournals(): Promise<Array<Journal>>{
+        let query: string = "SELECT * FROM journal";
+        let args: Array<any> = [];
+
+        return this.dbService.executeReadQuery(query, args)
+        .then((results) => {
+            return results;
+        })
+    }
+
     getSingleJournal(id: number): Promise<Journal>{
 
         let query: string = "SELECT * FROM journal where id = ?";
