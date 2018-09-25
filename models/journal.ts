@@ -1,7 +1,9 @@
 export default class Journal{
 
-    _id: number | null;
-    _date: Date;
+    // two private fields have dummy values
+    private _id: number | null = null;
+    private _date: Date = new Date();
+
     title: string;
     content: string;
 
@@ -16,26 +18,31 @@ export default class Journal{
             date = new Date()
         } = obj;
 
-        this._id = id;
+        this.setId(id);
         this.title = title;
         this.content = content;
-        this._date = date;
+        this.setDate(date);
+
     }
 
     // id and date should be read only
-    get id(){
+    get id(): number | null{
         return this._id;
     }
     
-    get date(){
+    get date(): Date{
         return this._date;
     }
 
-    setId(id: number){
+    setId(id: number | null){
         this._id = id;
     }
+    
+    private setDate(date: Date){
+        this._date = date;
+    }
 
-    toJSON(){
+    toJSONObj(){
         return JSON.parse(JSON.stringify(this));
     }
 }

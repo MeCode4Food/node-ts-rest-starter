@@ -17,7 +17,7 @@ journalRouter.get('/:id', (req, res) => {
 
                 let response = new Response();
                 response.status = "OK";
-                response.data = journalResult.toJSON();
+                response.data = journalResult.toJSONObj();
                 
                 res.status(200).json(response);
             })
@@ -36,22 +36,11 @@ journalRouter.get('/:id', (req, res) => {
 
 journalRouter.get('/', (req, res) => {
     try {
-        console.log('here');
         journalController.getAllJournals()
             .then((results)=>{
-                console.log('results');
-                let json = Array<any>();
-                results.forEach((result) => {
-                    console.log(result);
-                    json.push(JSON.stringify(result));
-                });
-
-                let journalResult = results;
-
-                console.log(results);
                 let response = new Response();
                 response.status = "OK";
-                response.data = journalResult;
+                response.data = results;
                 
                 res.status(200).json(response);
             })
